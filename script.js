@@ -3,9 +3,9 @@
 const gameBoard = (function () {
 
     const board = [
-        [0,0,0],
-        [0,0,0],
-        [0,0,0]
+        [0,0,"X"],
+        [0,"X",0],
+        ["X",0,0]
     ];
 
 
@@ -36,8 +36,7 @@ const gameBoard = (function () {
     }
 
     function checkColumns (token) {
-        let col =1;
-        let columns;
+        let columns = [];
         for(let i=0; i<3; i++){
             columns = board.map(element => element[i]);
             
@@ -48,7 +47,14 @@ const gameBoard = (function () {
         return false;
     }
 
-    return { reset, display, placeToken, checkRows, checkColumns };
+    function checkDiagonals (token) {
+        const diag1 = [board[0][0],board[1][1],board[2][2]];
+        const diag2 = [board[0][2],board[1][1],board[2][0]];
+
+        return diag1.every((item)=> item==token) || diag2.every((item=> item==token));
+    }
+
+    return { reset, display, placeToken, checkRows, checkColumns, checkDiagonals};
 })();
 
 
