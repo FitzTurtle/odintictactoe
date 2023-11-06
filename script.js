@@ -35,7 +35,20 @@ const gameBoard = (function () {
         return false;
     }
 
-    return { reset, display, placeToken, checkRows };
+    function checkColumns (token) {
+        let col =1;
+        let columns;
+        for(let i=0; i<3; i++){
+            columns = board.map(element => element[i]);
+            
+            if(columns.every((colItem)=> colItem == token)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    return { reset, display, placeToken, checkRows, checkColumns };
 })();
 
 
