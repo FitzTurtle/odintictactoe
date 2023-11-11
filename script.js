@@ -86,14 +86,14 @@ function createPlayer(name, token, isTurn) {
 
 
 //Game function family
-function game() {
+function game(playerOne, playerTwo) {
 
     let gameOver = false;
-    let turn = 0;
+    let turn = 1;
     gameBoard.reset();
 
-    const player1 = createPlayer ("Player 1", "X", true);
-    const player2 = createPlayer ("Player 2", "O", false);
+    const player1 = createPlayer (playerOne, "X", true);
+    const player2 = createPlayer (playerTwo, "O", false);
 
     let currentPlayer = player1;
 
@@ -102,21 +102,32 @@ function game() {
     }
 
     const playToken = (x,y) => {
-        let correctMove = gameBoard.placeToken(x,y, currentPlayer.token);
+
+        if(!gameOver && turn<=9){
+            var correctMove = gameBoard.placeToken(x,y, currentPlayer.token);
+            gameOver = gameBoard.checkWin(currentPlayer.token);
+        }
         
         gameBoard.display();
-        
-        if(correctMove) {
+        console.log("Turn:"+turn);
+        console.log("Game over?"+gameOver);
+
+        if(gameOver) showResult(currentPlayer.name);
+        else if(turn>=9) showResult("Cat");
+        else if(correctMove) {
             switchPlayer();
-            console.log("Is the game won?"+gameBoard.checkWin(currentPlayer.token))
             turn++;
         }
         
+    }
+
+    const showResult = (player) => {
+        console.log("Player: "+player+" is the winner!");
     }
 
     return { playToken, switchPlayer }
     
 }
 
-const firstgame = game();
+const firstgame = game("Steve", "George");
 console.log(gameBoard);
