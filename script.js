@@ -71,22 +71,31 @@ const gameBoard = (function () {
 
 
 //Player function factory
-function createPlayer (name, token, isTurn) {
+function createPlayer(name, token, isTurn) {
 
     return { name, token, isTurn };
 }
 
 
 //Game function family
-function game () {
+function game() {
 
+    let gameOver = false;
     let turn = 0;
     gameBoard.reset();
-
 
     const player1 = createrPlayer ("Player 1", "X", true);
     const player2 = createPlayer ("Player 2", "O", false);
 
+    let currentPlayer = player1;
+
+    const switchPlayer = () => { 
+        currentPlayer = currentPlayer === player1 ? player2 : player1;
+    }
+
+    const playToken = (x,y) => {
+        board.placeToken(x,y, currentPlayer.token);
+    }
 
 }
 
