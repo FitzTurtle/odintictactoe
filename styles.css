@@ -37,26 +37,26 @@ body {
 }
 
 .gamezone {
+    align-self: center;
     display: grid;
     justify-content: center;
     align-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    gap: 5px;
+    padding: 5px;
 }
 
 .cell {
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
+    background-color: grey;
 }
 
-#c00, #c01, #c02, #c10, #c11, #c12 {
-    border-bottom: 1px solid black;
-}
-
-#c01, #c11, #c21, #c02, #c12, #c22 {
-    border-left: 1px solid black;
+.sidebar {
+    background-color: lightgrey;
 }
 
 .tokenX:hover {
-    background-color: red;
+    opacity: 50%;
 }
