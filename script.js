@@ -5,9 +5,9 @@ const gameBoard = (function () {
     let gameWon = false;
 
     const board = [
-        [0,0,"X"],
-        [0,"X",0],
-        ["X",0,0]
+        ['','',''],
+        ['','',''],
+        ['','','']
     ];
 
 
