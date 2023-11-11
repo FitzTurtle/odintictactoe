@@ -2,6 +2,8 @@
 
 const gameBoard = (function () {
 
+    let gameWon = false;
+
     const board = [
         [0,0,"X"],
         [0,"X",0],
@@ -15,6 +17,7 @@ const gameBoard = (function () {
                 outElement[i]="";
             }
         });
+        gameWon = false;
     };
 
     //for testing purposes.
@@ -54,7 +57,15 @@ const gameBoard = (function () {
         return diag1.every((item)=> item==token) || diag2.every((item=> item==token));
     }
 
-    return { reset, display, placeToken, checkRows, checkColumns, checkDiagonals};
+    function checkWin(token) {
+        if(checkColumns(token) || checkDiagonals(token) || checkRows(token)){
+            gameWon = true;
+            return true;
+        }
+        return false;
+    }
+
+    return { reset, display, placeToken, checkWin};
 })();
 
 
