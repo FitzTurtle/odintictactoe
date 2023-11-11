@@ -35,3 +35,28 @@ body {
     height: 75px;
     background-color: grey;
 }
+
+.gamezone {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+}
+
+#c00, #c01, #c02, #c10, #c11, #c12 {
+    border-bottom: 1px solid black;
+}
+
+#c01, #c11, #c21, #c02, #c12, #c22 {
+    border-left: 1px solid black;
+}
+
+.tokenX:hover {
+    background-color: red;
+}
