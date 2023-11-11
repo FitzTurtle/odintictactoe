@@ -22,11 +22,19 @@ const gameBoard = (function () {
 
     //for testing purposes.
     function display () {
-        console.log(board);
+        console.table(board);
     };
 
     function placeToken (row,col, token) {
-        board[row][col] = token;
+
+        let isValidRow = row>=0 && row<3;
+        let isvalidCol = col>=0 && col<3;
+        
+        if(isValidRow && isvalidCol && board[row][col]===''){
+            board[row][col] = token;
+            return true;
+        }
+        return false;
     };
 
     function checkRows (token) {
@@ -84,7 +92,7 @@ function game() {
     let turn = 0;
     gameBoard.reset();
 
-    const player1 = createrPlayer ("Player 1", "X", true);
+    const player1 = createPlayer ("Player 1", "X", true);
     const player2 = createPlayer ("Player 2", "O", false);
 
     let currentPlayer = player1;
@@ -94,9 +102,21 @@ function game() {
     }
 
     const playToken = (x,y) => {
-        board.placeToken(x,y, currentPlayer.token);
+        let correctMove = gameBoard.placeToken(x,y, currentPlayer.token);
+        
+        gameBoard.display();
+        
+        if(correctMove) {
+            switchPlayer();
+            console.log("Is the game won?"+gameBoard.checkWin(currentPlayer.token))
+            turn++;
+        }
+        
     }
 
+    return { playToken, switchPlayer }
+    
 }
 
+const firstgame = game();
 console.log(gameBoard);
