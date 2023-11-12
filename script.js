@@ -73,7 +73,7 @@ const gameBoard = (function () {
         return false;
     }
 
-    return { reset, display, placeToken, checkWin};
+    return { board, reset, display, placeToken, checkWin};
 })();
 
 
@@ -129,5 +129,30 @@ function game(playerOne, playerTwo) {
     
 }
 
-const firstgame = game("Steve", "George");
+function displayController(currentGame, currentBoard) {
+
+    let cells = Array.from(document.querySelectorAll(".cell"));
+
+    for(const cell of cells) {
+        cell.addEventListener('click', (event) => {            
+            //splits the string into an array, need the ... to spread out the array
+            console.log(event.target.getAttribute("id"));
+            currentGame.playToken(...event.target.getAttribute("id").split(','));
+            updateDisplay();
+        }, {once: true});
+    }
+
+    function updateDisplay() {
+        for(const cell of cells){
+            const [cellx, celly] = cell.getAttribute("id").split(',');
+            cell.textContent = currentBoard.board[cellx][celly];
+        }
+    }
+    
+    return { updateDisplay };
+}
+
+
+const firstGame = game("Steve", "George");
+const controller = displayController(firstGame, gameBoard);
 console.log(gameBoard);
