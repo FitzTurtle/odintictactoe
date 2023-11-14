@@ -37,6 +37,7 @@ body {
 }
 
 .gamezone {
+    position: relative;
     align-self: center;
     display: grid;
     justify-content: center;
@@ -63,3 +64,4 @@ body {
 .tokenX:hover {
     opacity: 50%;
 }
+

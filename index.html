@@ -15,6 +15,13 @@
         <div class="main">
             <div class="sidebar">Side</div>
             <div class="gamezone">
+                <dialog id="newGame">
+                    <p>Enter player names, or simply press enter to be player1 and player2</p>
+                </dialog>
+                <dialog id="gameOver">
+                    <p></p>
+                    <button onclick="displayController.resetGame()">Reset?</button>
+                </dialog>
                 <div class="cell" id="0,0"></div>
                 <div class="cell" id="0,1"></div>
                 <div class="cell" id="0,2"></div>

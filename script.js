@@ -1,8 +1,9 @@
 //Gameboard module
+const gameOverDialog = document.querySelector("dialog");
 
 const gameBoard = (function () {
 
-    let gameWon = false;
+    // let gameWon = false;
 
     const board = [
         ['','',''],
@@ -17,7 +18,7 @@ const gameBoard = (function () {
                 outElement[i]="";
             }
         });
-        gameWon = false;
+        // gameWon = false;
     };
 
     //for testing purposes.
@@ -67,7 +68,7 @@ const gameBoard = (function () {
 
     function checkWin(token) {
         if(checkColumns(token) || checkDiagonals(token) || checkRows(token)){
-            gameWon = true;
+            // gameWon = true;
             return true;
         }
         return false;
@@ -122,24 +123,31 @@ function game(playerOne, playerTwo) {
     }
 
     const showResult = (player) => {
-        console.log("Player: "+player+" is the winner!");
+        let winner = ("Player: "+player+" is the winner!");
+        dialog.querySelector("p").textContent = winner;
+        dialog.show();
     }
 
     return { playToken, switchPlayer }
     
 }
 
-function displayController(currentGame, currentBoard) {
 
+const displayController = (() => {
+
+    let currentBoard = gameBoard;
+    let currentGame = game("Steve","George");
     let cells = Array.from(document.querySelectorAll(".cell"));
 
-    for(const cell of cells) {
-        cell.addEventListener('click', (event) => {            
-            //splits the string into an array, need the ... to spread out the array
-            console.log(event.target.getAttribute("id"));
-            currentGame.playToken(...event.target.getAttribute("id").split(','));
-            updateDisplay();
-        }, {once: true});
+    function setClickEvents() {
+        for(const cell of cells) {
+            cell.addEventListener('click', (event) => {            
+                //splits the string into an array, need the ... to spread out the array
+                console.log(event.target.getAttribute("id"));
+                currentGame.playToken(...event.target.getAttribute("id").split(','));
+                updateDisplay();
+            }, {once: true});
+        }
     }
 
     function updateDisplay() {
@@ -149,10 +157,52 @@ function displayController(currentGame, currentBoard) {
         }
     }
     
-    return { updateDisplay };
-}
+    function resetGame() {
+        currentBoard.reset();
+        currentGame=game("newSteve","NewGeorge");
+        setClickEvents();
+        gameOverDialog.close();
+        updateDisplay();
+    }
+
+    function newGameDialogue(){
+
+    }
+
+    //initialize screen
+    (function () {
+        setClickEvents();
 
 
-const firstGame = game("Steve", "George");
-const controller = displayController(firstGame, gameBoard);
-console.log(gameBoard);
+    })();
+    
+    return {resetGame};
+})();
+
+// function displayController(currentGame, currentBoard) {
+
+//     let cells = Array.from(document.querySelectorAll(".cell"));
+
+//     for(const cell of cells) {
+//         cell.addEventListener('click', (event) => {            
+//             //splits the string into an array, need the ... to spread out the array
+//             console.log(event.target.getAttribute("id"));
+//             currentGame.playToken(...event.target.getAttribute("id").split(','));
+//             updateDisplay();
+//         }, {once: true});
+//     }
+
+//     function updateDisplay() {
+//         for(const cell of cells){
+//             const [cellx, celly] = cell.getAttribute("id").split(',');
+//             cell.textContent = currentBoard.board[cellx][celly];
+//         }
+//     }
+    
+//     return { updateDisplay };
+// }
+
+
+// const firstGame = game("Steve", "George");
+// const controller = displayController(firstGame, gameBoard);
+// console.log(gameBoard);
