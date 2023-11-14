@@ -1,5 +1,6 @@
 //Gameboard module
-const gameOverDialog = document.querySelector("dialog");
+const gameOverDialog = document.querySelector("#gameOver");
+const newGameDialog = document.querySelector("#newGame");
 
 const gameBoard = (function () {
 
@@ -124,8 +125,8 @@ function game(playerOne, playerTwo) {
 
     const showResult = (player) => {
         let winner = ("Player: "+player+" is the winner!");
-        dialog.querySelector("p").textContent = winner;
-        dialog.show();
+        gameOverDialog.querySelector("p").textContent = winner;
+        gameOverDialog.show();
     }
 
     return { playToken, switchPlayer }
