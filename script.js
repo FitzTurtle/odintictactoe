@@ -114,21 +114,20 @@ function game(playerOne, playerTwo) {
         console.log("Turn:"+turn);
         console.log("Game over?"+gameOver);
 
-        if(gameOver) showResult(currentPlayer.name);
-        else if(turn>=9) showResult("Cat");
+        if(gameOver) return {gameOver, winner: currentPlayer+" is the winner!"};
+        else if(turn>=9) {
+            gameOver = true;
+            return {gameOver, winner: "It is a draw!"};
+	    }
         else if(correctMove) {
             switchPlayer();
             turn++;
+	    return {gameOver, winner: ""};
         }
         
     }
 
-    const showResult = (player) => {
-        let winner = ("Player: "+player+" is the winner!");
-        gameOverDialog.querySelector("p").textContent = winner;
-        gameOverDialog.show();
-    }
-
+    
     return { playToken, switchPlayer }
     
 }
@@ -136,6 +135,9 @@ function game(playerOne, playerTwo) {
 
 const displayController = (() => {
 
+    let player1Name = "player1";
+    let player2Name = "player2";
+    let result = {};
     let currentBoard = gameBoard;
     let currentGame = game("Steve","George");
     let cells = Array.from(document.querySelectorAll(".cell"));
@@ -145,7 +147,8 @@ const displayController = (() => {
             cell.addEventListener('click', (event) => {            
                 //splits the string into an array, need the ... to spread out the array
                 console.log(event.target.getAttribute("id"));
-                currentGame.playToken(...event.target.getAttribute("id").split(','));
+                result = currentGame.playToken(...event.target.getAttribute("id").split(','));
+			if (result.gameOver===true) { showResult(result.winner); }
                 updateDisplay();
             }, {once: true});
         }
@@ -167,14 +170,22 @@ const displayController = (() => {
     }
 
     function newGameDialogue(){
-
+	player1Name = newGameDialog.querySelector("#p1name").value;
+	player2Name = newGameDialog.querySelector("#p2name").value;
+	newGameDialog.close();
     }
+
+    function showResult(winner) {
+        gameOverDialog.querySelector("p").textContent = winner;
+        gameOverDialog.show();
+    }
+
 
     //initialize screen
     (function () {
         setClickEvents();
-
-
+	// newGameDialog.show();
+	
     })();
     
     return {resetGame};
