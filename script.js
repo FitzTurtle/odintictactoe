@@ -104,17 +104,19 @@ function game(playerOne, playerTwo) {
     }
 
     const playToken = (x,y) => {
+        let correctMove=false;
 
         if(!gameOver && turn<=9){
-            var correctMove = gameBoard.placeToken(x,y, currentPlayer.token);
+            correctMove = gameBoard.placeToken(x,y, currentPlayer.token);
             gameOver = gameBoard.checkWin(currentPlayer.token);
         }
         
         gameBoard.display();
         console.log("Turn:"+turn);
         console.log("Game over?"+gameOver);
+        console.log("correct?"+correctMove);
 
-        if(gameOver) return {gameOver, winner: currentPlayer+" is the winner!"};
+        if(gameOver) return {gameOver, winner : currentPlayer.name+" is the winner!"};
         else if(turn>=9) {
             gameOver = true;
             return {gameOver, winner: "It is a draw!"};
@@ -142,15 +144,18 @@ const displayController = (() => {
     let currentGame = game("Steve","George");
     let cells = Array.from(document.querySelectorAll(".cell"));
 
+    function handlePlacement(event) {            
+        //splits the string into an array, need the ... to spread out the array
+        console.log(event.target.getAttribute("id"));
+        result = currentGame.playToken(...event.target.getAttribute("id").split(','));
+        console.log(result);
+        if (result.gameOver===true) { showResult(result.winner); }
+            updateDisplay();
+    }
+
     function setClickEvents() {
         for(const cell of cells) {
-            cell.addEventListener('click', (event) => {            
-                //splits the string into an array, need the ... to spread out the array
-                console.log(event.target.getAttribute("id"));
-                result = currentGame.playToken(...event.target.getAttribute("id").split(','));
-			if (result.gameOver===true) { showResult(result.winner); }
-                updateDisplay();
-            }, {once: true});
+            cell.addEventListener('click', handlePlacement, {once: true});
         }
     }
 
