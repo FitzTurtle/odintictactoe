@@ -1,6 +1,9 @@
 //Gameboard module
 const gameOverDialog = document.querySelector("#gameOver");
 const newGameDialog = document.querySelector("#newGame");
+const newGameButton = document.querySelector("#newGameButton");
+
+
 
 const gameBoard = (function () {
 
@@ -141,7 +144,7 @@ const displayController = (() => {
     let player2Name = "player2";
     let result = {};
     let currentBoard = gameBoard;
-    let currentGame = game("Steve","George");
+    let currentGame;
     let cells = Array.from(document.querySelectorAll(".cell"));
 
     function handlePlacement(event) {            
@@ -186,11 +189,18 @@ const displayController = (() => {
     }
 
 
-    //initialize screen
+    //initialize screen and set initial first game values
     (function () {
-        setClickEvents();
-	// newGameDialog.show();
-	
+        
+	    newGameDialog.show();
+
+        newGameButton.addEventListener("click", (event) => {
+            newGameDialogue();
+            event.preventDefault();
+            setClickEvents();
+            
+            currentGame = game(player1Name,player2Name);
+        })
     })();
     
     return {resetGame};
