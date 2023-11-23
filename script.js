@@ -191,14 +191,13 @@ const displayController = (() => {
 
     //initialize screen and set initial first game values
     (function () {
-        
 	    newGameDialog.show();
 
         newGameButton.addEventListener("click", (event) => {
             newGameDialogue();
             event.preventDefault();
             setClickEvents();
-            
+
             currentGame = game(player1Name,player2Name);
         })
     })();
