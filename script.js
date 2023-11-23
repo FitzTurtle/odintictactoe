@@ -171,16 +171,19 @@ const displayController = (() => {
     
     function resetGame() {
         currentBoard.reset();
-        currentGame=game("newSteve","NewGeorge");
         setClickEvents();
         gameOverDialog.close();
+        
         updateDisplay();
+        newGameDialog.show();
     }
 
     function newGameDialogue(){
-	player1Name = newGameDialog.querySelector("#p1name").value;
-	player2Name = newGameDialog.querySelector("#p2name").value;
-	newGameDialog.close();
+        player1Name = newGameDialog.querySelector("#p1name").value;
+        player2Name = newGameDialog.querySelector("#p2name").value;
+        document.querySelector("#player1").textContent=player1Name;
+        document.querySelector("#player2").textContent=player2Name;
+        newGameDialog.close();
     }
 
     function showResult(winner) {
