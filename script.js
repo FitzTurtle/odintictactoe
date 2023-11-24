@@ -140,8 +140,8 @@ function game(playerOne, playerTwo) {
 
 const displayController = (() => {
 
-    let player1Name = "player1";
-    let player2Name = "player2";
+    let player1Name = "player 1";
+    let player2Name = "player 2";
     let result = {};
     let currentBoard = gameBoard;
     let currentGame;
@@ -176,7 +176,6 @@ const displayController = (() => {
     
     function resetGame() {
         currentBoard.reset();
-        setClickEvents();
         gameOverDialog.close();
         updateDisplay();
         newGameDialog.show();
@@ -192,6 +191,7 @@ const displayController = (() => {
         console.log(player2Name);
         document.querySelector("#player1").textContent=player1Name;
         document.querySelector("#player2").textContent=player2Name;
+        setClickEvents();
         newGameDialog.close();
     }
 
@@ -209,7 +209,7 @@ const displayController = (() => {
         newGameButton.addEventListener("click", (event) => {
             newGameDialogue();
             event.preventDefault();
-            setClickEvents();
+            
 
             currentGame = game(player1Name,player2Name);
         })
