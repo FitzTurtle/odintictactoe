@@ -132,8 +132,12 @@ function game(playerOne, playerTwo) {
         
     }
 
+    function retrieveToken () {
+        return currentPlayer.token;
+    }
+
     
-    return { playToken, switchPlayer }
+    return { playToken, switchPlayer, retrieveToken }
     
 }
 
@@ -152,6 +156,7 @@ const displayController = (() => {
         console.log(event.target.getAttribute("id"));
         result = currentGame.playToken(...event.target.getAttribute("id").split(','));
         console.log(result);
+       
         if (result.gameOver===true) { showResult(result.winner); }
             updateDisplay();
     }
@@ -171,6 +176,9 @@ const displayController = (() => {
         for(const cell of cells){
             const [cellx, celly] = cell.getAttribute("id").split(',');
             cell.textContent = currentBoard.board[cellx][celly];
+        }
+        if(result.gameOver===false){
+            handleTokenHover();
         }
     }
     
@@ -192,15 +200,45 @@ const displayController = (() => {
         document.querySelector("#player1").textContent=player1Name;
         document.querySelector("#player2").textContent=player2Name;
         setClickEvents();
+        // handleTokenHover();
         newGameDialog.close();
     }
 
     function showResult(winner) {
         removeClickEvents();
+        clearHover();
         gameOverDialog.querySelector("p").textContent = winner;
         gameOverDialog.show();
     }
 
+    function handleTokenHover() {
+        for (const cell of cells) {
+            console.log(cell.textContent);
+            if(currentGame.retrieveToken()==="X"){
+                if(cell.textContent=="") { 
+                    cell.classList.add("tokenX");
+                    cell.classList.remove("tokenO");
+                }
+            } else if (currentGame.retrieveToken()==="O"){
+                if(cell.textContent==""){
+                    cell.classList.add("tokenO");
+                    cell.classList.remove("tokenX");
+                }
+            }
+            
+            if(cell.textContent!="") {
+              cell.classList.remove("tokenX");
+              cell.classList.remove("tokenO");
+            }
+        }
+    }
+
+    function clearHover() {
+        for (const cell of cells) {
+            cell.classList.remove("tokenX");
+            cell.classList.remove("tokenO");
+        }
+    }
 
     //initialize screen and set initial first game values
     (function () {
@@ -212,6 +250,7 @@ const displayController = (() => {
             
 
             currentGame = game(player1Name,player2Name);
+            handleTokenHover();
         })
     })();
     

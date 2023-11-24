@@ -65,9 +65,16 @@ body {
     background-color: lightgrey;
 }
 
-.tokenX:hover {
+.tokenX:hover:before {
+    content: "X";
     opacity: 50%;
 }
+
+.tokenO:hover:before {
+    content: "O";
+    opacity: 50%;
+}
+
 
 #newGameForm {
     display: flex;
