@@ -183,8 +183,13 @@ const displayController = (() => {
     }
 
     function newGameDialogue(){
-        player1Name = newGameDialog.querySelector("#p1name").value;
-        player2Name = newGameDialog.querySelector("#p2name").value;
+        let newP1Name = newGameDialog.querySelector("#p1name").value;
+        let newP2Name = newGameDialog.querySelector("#p2name").value;
+
+        player1Name = newP1Name == "" ? player1Name : newP1Name; 
+        player2Name = newP2Name == "" ? player2Name : newP2Name;
+        
+        console.log(player2Name);
         document.querySelector("#player1").textContent=player1Name;
         document.querySelector("#player2").textContent=player2Name;
         newGameDialog.close();
