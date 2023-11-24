@@ -156,6 +156,11 @@ const displayController = (() => {
             updateDisplay();
     }
 
+    function removeClickEvents() {
+        for(const cell of cells) {
+            cell.removeEventListener('click',handlePlacement);
+        }
+    }
     function setClickEvents() {
         for(const cell of cells) {
             cell.addEventListener('click', handlePlacement, {once: true});
@@ -173,7 +178,6 @@ const displayController = (() => {
         currentBoard.reset();
         setClickEvents();
         gameOverDialog.close();
-        
         updateDisplay();
         newGameDialog.show();
     }
@@ -187,6 +191,7 @@ const displayController = (() => {
     }
 
     function showResult(winner) {
+        removeClickEvents();
         gameOverDialog.querySelector("p").textContent = winner;
         gameOverDialog.show();
     }
