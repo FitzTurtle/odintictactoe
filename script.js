@@ -7,8 +7,6 @@ const newGameButton = document.querySelector("#newGameButton");
 
 const gameBoard = (function () {
 
-    // let gameWon = false;
-
     const board = [
         ['','',''],
         ['','',''],
@@ -22,11 +20,10 @@ const gameBoard = (function () {
                 outElement[i]="";
             }
         });
-        // gameWon = false;
     };
 
     //for testing purposes.
-    function display () {
+    function display() {
         console.table(board);
     };
 
@@ -114,10 +111,10 @@ function game(playerOne, playerTwo) {
             gameOver = gameBoard.checkWin(currentPlayer.token);
         }
         
-        gameBoard.display();
-        console.log("Turn:"+turn);
-        console.log("Game over?"+gameOver);
-        console.log("correct?"+correctMove);
+        // gameBoard.display();
+        // console.log("Turn:"+turn);
+        // console.log("Game over?"+gameOver);
+        // console.log("correct?"+correctMove);
 
         if(gameOver) return {gameOver, winner : currentPlayer.name+" is the winner!"};
         else if(turn>=9) {
@@ -256,31 +253,3 @@ const displayController = (() => {
     
     return {resetGame};
 })();
-
-// function displayController(currentGame, currentBoard) {
-
-//     let cells = Array.from(document.querySelectorAll(".cell"));
-
-//     for(const cell of cells) {
-//         cell.addEventListener('click', (event) => {            
-//             //splits the string into an array, need the ... to spread out the array
-//             console.log(event.target.getAttribute("id"));
-//             currentGame.playToken(...event.target.getAttribute("id").split(','));
-//             updateDisplay();
-//         }, {once: true});
-//     }
-
-//     function updateDisplay() {
-//         for(const cell of cells){
-//             const [cellx, celly] = cell.getAttribute("id").split(',');
-//             cell.textContent = currentBoard.board[cellx][celly];
-//         }
-//     }
-    
-//     return { updateDisplay };
-// }
-
-
-// const firstGame = game("Steve", "George");
-// const controller = displayController(firstGame, gameBoard);
-// console.log(gameBoard);

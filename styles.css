@@ -1,5 +1,9 @@
 body {
-
+    font-family: roboto, Arial, Helvetica, sans-serif;
+}
+@font-face {
+    font-family: roboto;
+    src: url(fonts/Roboto-Regular.ttf);
 }
 
 .container {
@@ -55,6 +59,8 @@ body {
     width: 100px;
     height: 100px;
     background-color: grey;
+
+    font-size: 2em;
 }
 
 .sidebar {
@@ -75,12 +81,15 @@ body {
     opacity: 50%;
 }
 
-
 #newGameForm {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+/* dialog {
+    position:initial;
+} */
 
 .inputRow {
     margin: 5px;
