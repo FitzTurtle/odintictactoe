@@ -29,11 +29,15 @@
             <div class="gamezone">
                 <dialog id="newGame">
                     <p>Enter player names, or simply press enter to be player1 and player2</p>
-                    <form action="">
-                        <label for="p1name">Player 1 (X):</label>
-                        <input type="text" id="p1name" name="p1name" />
-                        <label for="p2name">Player 2 (O):</label>
-                        <input type="text" id="p2name" name="p2name" />
+                    <form action="" id="newGameForm">
+                        <div class="inputRow">
+                            <label for="p1name">Player 1 (X):</label>
+                            <input type="text" id="p1name" name="p1name" />
+                        </div>
+                        <div class="inputRow">
+                            <label for="p2name">Player 2 (O):</label>
+                            <input type="text" id="p2name" name="p2name" />
+                        </div>
                         <button id="newGameButton">New game?</button>
                     </form>
                 </dialog>

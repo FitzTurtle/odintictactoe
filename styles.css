@@ -69,3 +69,12 @@ body {
     opacity: 50%;
 }
 
+#newGameForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputRow {
+    margin: 5px;
+}
