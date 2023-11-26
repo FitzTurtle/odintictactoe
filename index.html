@@ -15,11 +15,11 @@
         <div class="main">
             <div class="sidebar">
                 <div>
-                    <h1>Player 1:</h1>
+                    <h1>Player 1 (X):</h1>
                     <h2 id="player1">player 1</h2>
                 </div>
                 <div>
-                    <h1>Player 2:</h1>
+                    <h1>Player 2 (O):</h1>
                     <h2 id="player2">player 2</h2>
                 </div>
                 <div>
@@ -28,7 +28,7 @@
             </div>
             <div class="gamezone">
                 <dialog id="newGame">
-                    <p>Enter player names, or simply press enter to be player1 and player2</p>
+                    <h3>Enter player names, or simply press enter to be player1 and player2</h3>
                     <form action="" id="newGameForm">
                         <div class="inputRow">
                             <label for="p1name">Player 1 (X):</label>
@@ -42,8 +42,10 @@
                     </form>
                 </dialog>
                 <dialog id="gameOver">
-                    <p></p>
-                    <button onclick="displayController.resetGame()">Reset?</button>
+                    <div id="gameOverContent">
+                        <p></p>
+                        <button onclick="displayController.resetGame()">Reset?</button>
+                    </div>
                 </dialog>
                 <div class="cell" id="0,0"></div>
                 <div class="cell" id="0,1"></div>
@@ -57,7 +59,7 @@
             </div>
         </div>
         <div class="footer">
-            Footer
+            &#169 FitzTurtle
         </div>
     </div>
     

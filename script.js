@@ -1,10 +1,10 @@
-//Gameboard module
+
 const gameOverDialog = document.querySelector("#gameOver");
 const newGameDialog = document.querySelector("#newGame");
 const newGameButton = document.querySelector("#newGameButton");
 
 
-
+//Gameboard Module
 const gameBoard = (function () {
 
     const board = [
@@ -87,7 +87,7 @@ function createPlayer(name, token, isTurn) {
 }
 
 
-//Game function family
+//Game function factory
 function game(playerOne, playerTwo) {
 
     let gameOver = false;
@@ -138,7 +138,7 @@ function game(playerOne, playerTwo) {
     
 }
 
-
+//Display controller module pattern
 const displayController = (() => {
 
     let player1Name = "player 1";

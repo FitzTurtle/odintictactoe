@@ -1,9 +1,27 @@
+:root {
+    /* CSS HEX */
+--prussian-blue: #0b3954ff;
+--teal: #087e8bff;
+--columbia-blue: #bfd7eaff;
+--bittersweet: #ff5a5fff;
+--fire-engine-red: #c81d25ff;
+}
+
 body {
     font-family: roboto, Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
 }
 @font-face {
     font-family: roboto;
-    src: url(fonts/Roboto-Regular.ttf);
+    src: url(fonts/PixelifySans-VariableFont_wght.ttf);
+}
+
+button {
+    font-size: 1.2em;
+    font-family: roboto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border-color: var(--prussian-blue);
 }
 
 .container {
@@ -21,7 +39,8 @@ body {
     align-items: center;
     width: 100%;
     height: 125px;
-    background-color: grey;
+    color: var(--columbia-blue);
+    background-color: var(--prussian-blue);
 }
 
 .main {
@@ -37,7 +56,8 @@ body {
     justify-content: center;
     width: 100%;
     height: 75px;
-    background-color: grey;
+    color: var(--columbia-blue);
+    background-color: var(--prussian-blue);
 }
 
 .gamezone {
@@ -58,7 +78,7 @@ body {
     align-items: center;
     width: 100px;
     height: 100px;
-    background-color: grey;
+    background-color: var(--teal);
 
     font-size: 2em;
 }
@@ -68,7 +88,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: lightgrey;
+    color: var(--columbia-blue);
+    background-color: var(--teal);
 }
 
 .tokenX:hover:before {
@@ -82,14 +103,22 @@ body {
 }
 
 #newGameForm {
+    
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* dialog {
-    position:initial;
-} */
+dialog {
+    width: 50%;
+    font-size: 1.2em;
+}
+
+#gameOverContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .inputRow {
     margin: 5px;
